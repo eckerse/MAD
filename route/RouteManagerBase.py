@@ -49,12 +49,14 @@ class RouteManagerBase(ABC):
     def __init__(self, db_wrapper: DbWrapperBase, dbm: DataManager, uri: str, coords: List[Location], max_radius: float,
                  max_coords_within_radius: int, path_to_include_geofence: str, path_to_exclude_geofence: str,
                  routefile: str, mode=None, init: bool = False, name: str = "unknown", settings: dict = None,
-                 level: bool = False, calctype: str = "optimized", joinqueue = None):
+                 level: bool = False, calctype: str = "optimized", useS2: bool = False, S2level: int = 15, joinqueue = None):
         self.db_wrapper: DbWrapperBase = db_wrapper
         self.init: bool = init
         self.name: str = name
         self._data_manager = dbm
         self._uri = uri
+        self.useS2: bool = useS2
+        self.S2level: int = S2level
         self._coords_unstructured: List[Location] = coords
         self.geofence_helper: GeofenceHelper = GeofenceHelper(
             path_to_include_geofence, path_to_exclude_geofence)
@@ -281,9 +283,14 @@ class RouteManagerBase(ABC):
             logger.debug("Deleting routefile...")
             os.remove(str(routefile) + ".calc")
         new_route = getJsonRoute(coords, max_radius, max_coords_within_radius, num_processes=num_procs,
+<<<<<<< HEAD
                                  routefile=routefile, algorithm=calctype)
         if self._overwrite_calculation:
             self._overwrite_calculation = False
+=======
+                                 routefile=routefile, algorithm=calctype, useS2=self.useS2, S2level=self.S2level)
+        if self._overwrite_calculation: self._overwrite_calculation = False
+>>>>>>> ff3d545... Change route calculation to consider S2 cell level for viewing radius. For now only for raid_mitm route calculation. Other modes still disabled, but should work also
         return new_route
 
     def empty_routequeue(self):

@@ -9,7 +9,6 @@ class RouteManagerFactory:
     @staticmethod
     def get_routemanager(db_wrapper, dbm, uri, coords, max_radius, max_coords_within_radius, path_to_include_geofence,
                          path_to_exclude_geofence: Optional[str], routefile: str, mode: Optional[str] = None,
-<<<<<<< HEAD
                          init: bool = False, name: str = "unknown", settings=None, coords_spawns_known: bool = False,
                          level: bool = False, calctype: str = "optimized", useS2: bool = False, S2level: int = 15, joinqueue=None):
 

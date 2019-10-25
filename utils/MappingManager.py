@@ -19,7 +19,7 @@ from utils.s2Helper import S2Helper
 mode_mapping = {
     "raids_mitm": {
         "s2_cell_level": 15,
-        "range": 520,
+        "range": 490,
         "range_init": 490,
         "max_count": 100000
     },
